@@ -1,0 +1,38 @@
+.logo {
+    width: 36px;
+    height: 36px;
+  }
+
+.sidenav-brand {
+    margin: 5px 5px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+.mat-sidenav {
+    border-top-right-radius: 10px;
+    text-align: center;
+    font-size: 0.7rem;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .sidenav-content {
+    flex:1;
+  }
+
+  .menu-button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 13px;
+    font-weight: 500;
+  
+    mat-icon {
+        margin-right: 8px;
+    }
+  }

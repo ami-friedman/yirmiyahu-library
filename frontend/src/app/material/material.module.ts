@@ -25,6 +25,7 @@ import { CommonModule } from '@angular/common';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import {ClipboardModule} from '@angular/cdk/clipboard';
 import {MatRadioModule} from '@angular/material/radio';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 
 
@@ -56,7 +57,8 @@ const material = [
   MatPaginatorModule,
   MatCardModule,
   ClipboardModule,
-  MatRadioModule
+  MatRadioModule,
+  MatExpansionModule
 ]
 
 @NgModule({
