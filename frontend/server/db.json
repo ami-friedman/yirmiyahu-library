@@ -2,19 +2,16 @@
     "users": [
         {
             "id": 1,
-            "name": "John Doe"
+            "name": "Amichai Friedman",
+            "email": "amishosh@gmail.com",
+            "role": "Admin"
+
         },
         {
             "id": 2,
-            "name": "Kenny"
-        },
-        {
-            "id": 3,
-            "name": "Mark"
-        },
-        {
-            "id": 4,
-            "name": "Justin"
+            "name": "Michael Fox",
+            "email": "michaelf@gmail.com",
+            "role": "Subscriber"
         }
     ]
 }
