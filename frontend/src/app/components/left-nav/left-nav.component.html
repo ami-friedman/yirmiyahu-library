@@ -35,6 +35,15 @@
         </span>
     </content>
 
+    <footer class="bottom-buttons">
+      <button mat-button class="menu-button logout" (click)="onLogout()" matTooltip="Logout">
+        <span  class="name">
+          {{currentUser.name}}
+         </span>
+              <mat-icon>power_settings_new</mat-icon>
+      </button>
+  </footer>
+
 
 </div>
 

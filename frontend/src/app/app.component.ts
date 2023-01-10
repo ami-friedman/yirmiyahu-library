@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { MatIconRegistry } from '@angular/material/icon';
-import { DomSanitizer } from '@angular/platform-browser';
+import { Store } from '@ngrx/store';
+import { AppState } from './app.state';
+import * as AuthActions from './components/auth/auth.actions';
 
 @Component({
   selector: 'app-root',
@@ -9,4 +10,11 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class AppComponent {
   title = 'yirmiyahu-library';
+
+  constructor(private store: Store<AppState>) {
+    const user = localStorage.getItem('user');
+    if (user) {
+      this.store.dispatch(AuthActions.login({user: JSON.parse(user)}))
+    }
+  }
 }

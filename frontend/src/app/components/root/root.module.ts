@@ -18,7 +18,6 @@ import { RouterModule, Routes } from '@angular/router';
     RouterModule,
     CommonModule,
     SharedModule,
-    AuthModule.forRoot()
   ]
 })
 export class RootModule { 
