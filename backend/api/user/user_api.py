@@ -1,9 +1,8 @@
 from flask import request
 from flask_restx import Namespace, Resource, fields
 
-from core.enums import Role
-from db.db_models import User
-from responses import OK
+from core.services.user_service import user_svc
+
 
 user_api = Namespace('user', description='User management')
 
@@ -18,9 +17,7 @@ class UserLogin(Resource):
     def post(self):
         token = request.json.get('token')
 
-        user = User(id=1, name='Amichai Friedman', email='amishosh@gmail.com', last_valid_token='@dsdklj122', role=Role.ADMIN)
-
-        res = OK(data=user.json)
+        res = user_svc.login(token)
 
         return res.get_as_json(), res.status_code
 

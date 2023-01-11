@@ -2,7 +2,7 @@ import {Injectable} from "@angular/core";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {noop, Observable, tap} from "rxjs";
 import { User } from "src/app/models/user.model";
-import { SocialAuthService } from "angularx-social-login";
+import { SocialAuthService, SocialUser } from "angularx-social-login";
 import { Router } from "@angular/router";
 import { Store } from "@ngrx/store";
 import { AppState } from "src/app/app.state";
@@ -18,11 +18,11 @@ export class AuthService {
         private socialAuthService: SocialAuthService,  
         private router: Router, 
         private store: Store<AppState>,) {
-            this.socialAuthService.authState.subscribe(user => { 
+            this.socialAuthService.authState.subscribe((user: SocialUser) => { 
                 if (!user) {
                   return
                 }
-                this.login(user.authToken)
+                this.login(user.idToken)
                 .pipe(
                   tap(user => {
                   this.store.dispatch(AuthActions.login({user}));

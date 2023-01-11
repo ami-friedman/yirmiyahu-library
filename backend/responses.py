@@ -21,9 +21,14 @@ class OK(BaseResponse):
 
 class BadRequest(BaseResponse):
     def __init__(self, msg: str = None):
-        super().__init__(msg=msg,status_code=requests.codes.bad_request)
+        super().__init__(msg=msg, status_code=requests.codes.bad_request)
 
 
 class GenericError(BaseResponse):
     def __init__(self, msg: str = None):
-        super().__init__(msg=msg,status_code=requests.codes.internal_server_error)
+        super().__init__(msg=msg, status_code=requests.codes.internal_server_error)
+
+
+class UnauthorizedRes(BaseResponse):
+    def __init__(self, msg: str = None):
+        super().__init__(msg=msg, status_code=requests.codes.unauthorized)
