@@ -6,7 +6,8 @@ import { SocialAuthService, SocialUser } from "angularx-social-login";
 import { Router } from "@angular/router";
 import { Store } from "@ngrx/store";
 import { AppState } from "src/app/app.state";
-import * as AuthActions from '../auth/auth.actions'
+import { UserFacadeService } from "./user-facade.service";
+
 
 
 @Injectable({
@@ -17,7 +18,8 @@ export class AuthService {
     constructor(private http:HttpClient, 
         private socialAuthService: SocialAuthService,  
         private router: Router, 
-        private store: Store<AppState>,) {
+        private userService: UserFacadeService
+       ,) {
             this.socialAuthService.authState.subscribe((user: SocialUser) => { 
                 if (!user) {
                   return
@@ -25,7 +27,7 @@ export class AuthService {
                 this.login(user.idToken)
                 .pipe(
                   tap(user => {
-                  this.store.dispatch(AuthActions.login({user}));
+                  this.userService.login(user);
                   this.router.navigateByUrl('');
                 })
               )

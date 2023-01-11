@@ -6,34 +6,32 @@ import { AppState } from 'src/app/app.state';
 import { User } from 'src/app/models/user.model';
 import * as AuthActions from '../auth/auth.actions';
 import { selectCurrentUser } from '../auth/auth.selector';
+import { UserFacadeService } from '../auth/user-facade.service';
 
 @Component({
   selector: 'app-left-nav',
   templateUrl: './left-nav.component.html',
   styleUrls: ['./left-nav.component.scss']
 })
-export class LeftNavComponent implements OnInit {
+export class LeftNavComponent {
 
   currentUser: User;
 
   constructor(
-    private store: Store<AppState>, 
     private router: Router,
-    private socialAuthService: SocialAuthService
+    private socialAuthService: SocialAuthService,
+    private userService: UserFacadeService
     ) { 
-      this.store.select(selectCurrentUser).subscribe(
+      this.userService.currentUser$.subscribe(
         (user: User) => {
           this.currentUser = user;
       }
     )
     }
 
-  ngOnInit(): void {
-  }
-
-  onLogout() {
+    onLogout() {
     this.socialAuthService.signOut();
-    this.store.dispatch(AuthActions.logout());
+    this.userService.logout();
     this.router.navigateByUrl('auth/login');
   }
 
