@@ -1,0 +1,17 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "name": "Amichai Friedman",
+            "email": "amishosh@gmail.com",
+            "role": "Admin"
+
+        },
+        {
+            "id": 2,
+            "name": "Michael Fox",
+            "email": "michaelf@gmail.com",
+            "role": "Subscriber"
+        }
+    ]
+}

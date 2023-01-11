@@ -1,0 +1,10 @@
+
+<mat-sidenav-container fullscreen autosize>
+    <mat-sidenav #sidenav="matSidenav" opened mode="side" class="mat-elevation-z8" [disableClose]="true">
+        <app-left-nav></app-left-nav>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="content">
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>   
+</mat-sidenav-container> 
