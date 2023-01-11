@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from './app.state';
 import * as AuthActions from './components/auth/auth.actions';
+import { UserFacadeService } from './components/auth/user-facade.service';
 
 @Component({
   selector: 'app-root',
@@ -11,10 +12,10 @@ import * as AuthActions from './components/auth/auth.actions';
 export class AppComponent {
   title = 'yirmiyahu-library';
 
-  constructor(private store: Store<AppState>) {
+  constructor(private userService: UserFacadeService) {
     const user = localStorage.getItem('user');
     if (user) {
-      this.store.dispatch(AuthActions.login({user: JSON.parse(user)}))
+      this.userService.login(JSON.parse(user))
     }
   }
 }
