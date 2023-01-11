@@ -15,7 +15,7 @@ export class AppComponent {
   constructor(private userService: UserFacadeService) {
     const user = localStorage.getItem('user');
     if (user) {
-      this.userService.login(JSON.parse(user))
+      this.userService.loggedIn(JSON.parse(user))
     }
   }
 }

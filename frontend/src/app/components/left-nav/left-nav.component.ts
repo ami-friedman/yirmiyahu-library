@@ -1,11 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
 import { SocialAuthService } from 'angularx-social-login';
-import { AppState } from 'src/app/app.state';
 import { User } from 'src/app/models/user.model';
-import * as AuthActions from '../auth/auth.actions';
-import { selectCurrentUser } from '../auth/auth.selector';
 import { UserFacadeService } from '../auth/user-facade.service';
 
 @Component({
