@@ -23,7 +23,7 @@ export class UserFacadeService {
     this.store.dispatch(AuthActions.login({user}))
   }
 
-  logout() {
+  loggedOut() {
     this.store.dispatch(AuthActions.logout())
   }
 

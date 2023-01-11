@@ -27,7 +27,7 @@ export class LeftNavComponent {
 
     onLogout() {
     this.socialAuthService.signOut();
-    this.userService.logout();
+    this.userService.loggedOut();
     this.router.navigateByUrl('auth/login');
   }
 
