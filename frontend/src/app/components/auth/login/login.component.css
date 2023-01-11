@@ -1,0 +1,17 @@
+.login {
+    padding-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+}
+
+.jumbertone {
+    border-radius: 20px;
+    padding: 20px;
+    text-align: center;
+}
+
+.login-form {
+    margin-top: 10px;
+}
