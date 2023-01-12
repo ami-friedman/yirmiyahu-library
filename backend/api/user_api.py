@@ -4,7 +4,7 @@ from flask_restx import Namespace, Resource, fields
 from core.services.user_service import user_svc
 
 
-user_api = Namespace('user', description='User management')
+user_api = Namespace('users', description='User management')
 
 user_login_model = user_api.model(
     name='User login',

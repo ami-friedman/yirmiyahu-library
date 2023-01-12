@@ -4,9 +4,11 @@ from typing import Dict
 import sqlalchemy
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import ForeignKey
 from sqlalchemy_utils import database_exists, create_database
 
 from core.enums import Role
+from core.exceptions import Conflict
 from logger import get_logger
 
 flask_app = Flask(__name__)
@@ -44,12 +46,33 @@ class User(db.Model):
         }
 
 
+class Author(db.Model):
+    __table_args__ = (
+        db.UniqueConstraint('first_name', 'last_name', name='unique_author'),
+    )
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    first_name = db.Column(db.String(80), nullable=False)
+    last_name = db.Column(db.String(80), nullable=False)
+    # books = db.relationship('Book', backref=db.backref('author', lazy=True), cascade="all,delete")
+
+    def to_dict(self) -> Dict:
+        return {
+            'first_name': self.first_name,
+            'last_name': self.last_name,
+            'id': self.id,
+            # 'books': self.books
+        }
+
+    def __repr__(self):
+        return f'<Author {self.first_name} {self.last_name}>'
+
+
 def db_commit():
     try:
         db.session.commit()
     except sqlalchemy.exc.IntegrityError as _:
         logger.error('Some/all records already exists')
-        raise
+        raise Conflict
     except Exception as exc:
         logger.error(f'something went wrong during adding of record: {exc}')
         db.session.rollback()

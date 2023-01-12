@@ -1,6 +1,6 @@
-from exceptions import Unauthorized
+from core.exceptions import Unauthorized, Conflict
 from logger import get_logger
-from responses import OK, GenericError, UnauthorizedRes
+from responses import OK, GenericError, UnauthorizedRes, ConflictRes
 
 logger = get_logger()
 
@@ -20,6 +20,10 @@ def api_interface(func):
             msg = f'User is unauthorized: {exc}'
             logger.error(msg)
             return UnauthorizedRes(msg='User is unauthorized')
+        except Conflict:
+            msg = f'The item already exists in DB'
+            logger.error(msg)
+            return ConflictRes(msg='The item already exists in DB')
         except Exception as exc:
             msg = f'Error occurred in {func}: {exc}'
             logger.error(msg)

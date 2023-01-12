@@ -9,7 +9,8 @@ from flask_cors import CORS
 from urllib3.exceptions import InsecureRequestWarning
 from waitress import serve
 
-from api.user.user_api import user_api
+from api.author_api import author_api
+from api.user_api import user_api
 from db.db_models import flask_app
 from logger import get_logger
 
@@ -25,6 +26,7 @@ app = Api(app=blueprint,
           description='Yirmiyahu Library Application')
 
 app.add_namespace(user_api)
+app.add_namespace(author_api)
 
 logging.basicConfig(level=logging.NOTSET,
                     format='%(asctime)s : %(levelname)-6s : %(filename)s:%(lineno)s:%(funcName)-30s :: %(message)s')
