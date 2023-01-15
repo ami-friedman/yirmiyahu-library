@@ -16,8 +16,9 @@ from api.category_api import category_api
 from api.loan_api import loan_api
 from api.user_api import user_api
 from db.db_config import flask_app, db
+from flask_login import LoginManager
 from logger import get_logger
-
+from login_manager import login_manager
 
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 CORS(flask_app, resources={r'/*': {'origins': '*'}})
@@ -43,6 +44,7 @@ flask_app.logger = get_logger()
 
 if __name__ == '__main__':
     db.init_app(flask_app)
+    login_manager.init_app(flask_app)
     if os.environ.get('LOCAL_RUN'):
         flask_app.run(debug=True, port=5000, host='127.0.0.1')
     else:

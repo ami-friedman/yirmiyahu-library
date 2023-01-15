@@ -17,6 +17,7 @@ if not DATABASE_URI:
 flask_app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URI
 flask_app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 flask_app.config['SQLALCHEMY_POOL_RECYCLE'] = 60
+flask_app.config['SECRET_KEY'] = 'secret-key-goes-here'
 
 
 db = SQLAlchemy(flask_app)

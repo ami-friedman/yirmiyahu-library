@@ -1,10 +1,12 @@
 from typing import Dict
 
+from flask_login import UserMixin
+
 from core.enums import Role
 from db.db_config import db
 
 
-class User(db.Model):
+class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), nullable=False)
     email = db.Column(db.String(80), nullable=False, unique=True)

@@ -19,7 +19,8 @@ def api_interface(func):
         except Unauthorized as exc:
             msg = f'User is unauthorized: {exc}'
             logger.error(msg)
-            return UnauthorizedRes(msg='User is unauthorized')
+            res = UnauthorizedRes(msg='User is unauthorized')
+            return res.get_as_json(), res.status_code
         except Conflict:
             msg = f'The item already exists in DB'
             logger.error(msg)

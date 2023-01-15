@@ -1,4 +1,5 @@
 from flask import request
+from flask_login import login_required
 from flask_restx import Namespace, Resource, fields
 
 from core.services.author_service import author_svc
@@ -32,6 +33,7 @@ class Authors(Resource):
 
         return res.get_as_json(), res.status_code
 
+    @login_required
     def get(self):
         res = author_svc.get_authors()
 
