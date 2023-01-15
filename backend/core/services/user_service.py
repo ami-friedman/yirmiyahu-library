@@ -24,7 +24,6 @@ class UserService:
             raise Exception('GOOGLE_CLIENT_ID not set! Cannot authenticate with app')
         self.admins = os.getenv('ADMINS').split(',')
 
-    @api_interface
     def login(self, token: str) -> Dict:
         try:
             # user_info = id_token.verify_oauth2_token(token, requests.Request(), self.client_id)

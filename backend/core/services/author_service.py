@@ -12,7 +12,6 @@ class AuthorService:
     def __init__(self):
         self.logger = get_logger()
 
-    @api_interface
     def add_author(self, first_name: str, last_name: str) -> int:
         self.logger.info(f'About to add author: {first_name=} {last_name=}')
         author = Author(first_name=first_name, last_name=last_name)
@@ -24,7 +23,6 @@ class AuthorService:
         self.logger.info(f'{author=} added! ID={author.id}')
         return author.id
 
-    @api_interface
     def get_author(self, author_id: int) -> Dict:
         self.logger.info(f'About to get author {author_id=}')
         author = Author.query.get(author_id)
@@ -34,14 +32,12 @@ class AuthorService:
 
         return author.json
 
-    @api_interface
     def get_authors(self) -> List[Dict]:
         self.logger.info(f'About to get all authors')
         authors = Author.query.all()
 
         return [author.json for author in authors]
 
-    @api_interface
     def update_author(self, author_id: int, updated_author: Dict) -> Dict:
         self.logger.info(f'About to update {author_id=}')
         author = Author.query.get(author_id)

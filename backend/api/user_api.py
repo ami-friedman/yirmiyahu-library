@@ -1,6 +1,7 @@
 from flask import request
 from flask_restx import Namespace, Resource, fields
 
+from core.decorators import api_interface
 from core.services.user_service import user_svc
 
 
@@ -14,12 +15,11 @@ user_login_model = user_api.model(
 
 class UserLogin(Resource):
     @user_api.expect(user_login_model, validate=True)
+    @api_interface
     def post(self):
         token = request.json.get('token')
 
-        res = user_svc.login(token)
-
-        return res.get_as_json(), res.status_code
+        return user_svc.login(token)
 
 
 user_api.add_resource(UserLogin, '/login')

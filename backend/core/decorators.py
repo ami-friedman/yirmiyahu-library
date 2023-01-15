@@ -15,7 +15,8 @@ def api_interface(func):
     def inner_function(*args, **kwargs):
         try:
             data = func(*args, **kwargs)
-            return OK(data=data)
+            res = OK(data=data)
+            return res.get_as_json(), res.status_code
         except Unauthorized as exc:
             msg = f'User is unauthorized: {exc}'
             logger.error(msg)
@@ -24,18 +25,22 @@ def api_interface(func):
         except Conflict:
             msg = f'The item already exists in DB'
             logger.error(msg)
-            return ConflictRes(msg=msg)
+            res = ConflictRes(msg=msg)
+            return res.get_as_json(), res.status_code
         except NotFound:
             msg = f'The item was not found in DB'
             logger.error(msg)
-            return NotFoundRes(msg=msg)
+            res = NotFoundRes(msg=msg)
+            return res.get_as_json(), res.status_code
         except NotAllowed:
             msg = f'The action requested is not allowed'
             logger.error(msg)
-            return NotAllowedRes(msg=msg)
+            res = NotAllowedRes(msg=msg)
+            return res.get_as_json(), res.status_code
         except Exception as exc:
             msg = f'Error occurred in {func}: {exc}'
             logger.error(msg)
-            return GenericError(msg='Unexpected error occurred! Please contact Yirmiyahu Library support')
+            res = GenericError(msg='Unexpected error occurred! Please contact Yirmiyahu Library support')
+            return res.get_as_json(), res.status_code
 
     return inner_function

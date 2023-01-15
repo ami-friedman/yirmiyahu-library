@@ -12,7 +12,6 @@ class BookTypeService:
     def __init__(self):
         self.logger = get_logger()
 
-    @api_interface
     def add_book_type(self, name: str, loan_duration: int) -> int:
         self.logger.info(f'About to add book_type: {name=} {loan_duration=}')
         book_type = BookType(name=name, loan_duration=loan_duration)
@@ -24,7 +23,6 @@ class BookTypeService:
         self.logger.info(f'{book_type=} added! ID={book_type.id}')
         return book_type.id
 
-    @api_interface
     def get_book_type(self, book_type_id: int) -> Dict:
         self.logger.info(f'About to get book_type {book_type_id=}')
         book_type = BookType.query.get(book_type_id)
@@ -34,14 +32,12 @@ class BookTypeService:
 
         return book_type.json
 
-    @api_interface
     def get_book_types(self) -> List[Dict]:
         self.logger.info(f'About to get all book_types')
         book_types = BookType.query.all()
 
         return [book_type.json for book_type in book_types]
 
-    @api_interface
     def update_book_type(self, book_type_id: int, updated_book_type: Dict) -> Dict:
         self.logger.info(f'About to update {book_type_id=}')
         book_type = BookType.query.get(book_type_id)

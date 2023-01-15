@@ -2,6 +2,7 @@ from flask import request
 from flask_login import login_required
 from flask_restx import Namespace, Resource, fields
 
+from core.decorators import api_interface
 from core.services.author_service import author_svc
 
 
@@ -25,35 +26,34 @@ author_id_doc = {'author_id': 'Author ID'}
 
 class Authors(Resource):
     @author_api.expect(add_author_model, validate=True)
+    @login_required
+    @api_interface
     def post(self):
         first_name = request.json.get('first_name')
         last_name = request.json.get('last_name')
 
-        res = author_svc.add_author(first_name, last_name)
-
-        return res.get_as_json(), res.status_code
+        return author_svc.add_author(first_name, last_name)
 
     @login_required
+    @api_interface
     def get(self):
-        res = author_svc.get_authors()
-
-        return res.get_as_json(), res.status_code
+        return author_svc.get_authors()
 
 
 class Author(Resource):
     @author_api.doc(author_id_doc)
+    @login_required
+    @api_interface
     def get(self, author_id: int):
-        res = author_svc.get_author(author_id)
-
-        return res.get_as_json(), res.status_code
+        return author_svc.get_author(author_id)
 
     @author_api.doc(author_id_doc)
     @author_api.expect(update_author_model, validate=True)
+    @login_required
+    @api_interface
     def put(self, author_id: int):
         updated_author = request.json.get('updated_author')
-        res = author_svc.update_author(author_id, updated_author)
-
-        return res.get_as_json(), res.status_code
+        return author_svc.update_author(author_id, updated_author)
 
 
 author_api.add_resource(Authors, '')

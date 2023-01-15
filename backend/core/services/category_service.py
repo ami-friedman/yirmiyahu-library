@@ -12,7 +12,6 @@ class CategoryService:
     def __init__(self):
         self.logger = get_logger()
 
-    @api_interface
     def add_category(self, name: str) -> int:
         self.logger.info(f'About to add category: {name=}')
         category = Category(name=name)
@@ -24,7 +23,6 @@ class CategoryService:
         self.logger.info(f'{category=} added! ID={category.id}')
         return category.id
 
-    @api_interface
     def get_category(self, category_id: int) -> Dict:
         self.logger.info(f'About to get category {category_id=}')
         category = Category.query.get(category_id)
@@ -34,14 +32,12 @@ class CategoryService:
 
         return category.json
 
-    @api_interface
     def get_categories(self) -> List[Dict]:
         self.logger.info(f'About to get all categories')
         categories = Category.query.all()
 
         return [category.json for category in categories]
 
-    @api_interface
     def update_category(self, category_id: int, updated_category: Dict) -> Dict:
         self.logger.info(f'About to update {category_id=}')
         category = Category.query.get(category_id)

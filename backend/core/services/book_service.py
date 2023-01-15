@@ -11,8 +11,7 @@ class BookService:
 
     def __init__(self):
         self.logger = get_logger()
-
-    @api_interface
+        
     def add_book(self, title: str, author_id: int, category_id: int, book_type_id: int) -> int:
         self.logger.info(f'About to add book: {title=}')
         book = Book(title=title, author_id=author_id, category_id=category_id, book_type_id=book_type_id)
@@ -24,7 +23,6 @@ class BookService:
         self.logger.info(f'{book=} added! ID={book.id}')
         return book.id
 
-    @api_interface
     def get_book(self, book_id: int) -> Dict:
         self.logger.info(f'About to get book {book_id=}')
         book = Book.query.get(book_id)
@@ -34,14 +32,12 @@ class BookService:
 
         return book.json
 
-    @api_interface
     def get_books(self) -> List[Dict]:
         self.logger.info(f'About to get all books')
         books = Book.query.all()
 
         return [book.json for book in books]
 
-    @api_interface
     def update_book(self, book_id: int, updated_book: Dict) -> Dict:
         self.logger.info(f'About to update {book_id=}')
         book = Book.query.get(book_id)

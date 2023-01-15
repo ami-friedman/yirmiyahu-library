@@ -15,7 +15,6 @@ class LoanService:
     def __init__(self):
         self.logger = get_logger()
 
-    @api_interface
     def add_loan(self, book_id: int, sub_id: int) -> int:
         from core.services.book_service import book_svc
 
@@ -35,7 +34,6 @@ class LoanService:
         self.logger.info(f'{loan=} added! ID={loan.id}')
         return loan.id
 
-    @api_interface
     def get_loan(self, loan_id: int) -> Dict:
         self.logger.info(f'About to get loan {loan_id=}')
         loan = Loan.query.get(loan_id)
@@ -45,7 +43,6 @@ class LoanService:
 
         return loan.json
 
-    @api_interface
     def extend_loan(self, loan_id: int):
         loan = Loan.query.get(loan_id)
         self.logger.info(f'Requested to extend {loan=}')

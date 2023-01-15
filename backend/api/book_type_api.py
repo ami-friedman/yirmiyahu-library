@@ -1,6 +1,8 @@
 from flask import request
+from flask_login import login_required
 from flask_restx import Namespace, Resource, fields
 
+from core.decorators import api_interface
 from core.services.book_type_service import book_type_svc
 
 
@@ -24,34 +26,34 @@ book_type_id_doc = {'book_type_id': 'BookType ID'}
 
 class BookTypes(Resource):
     @book_type_api.expect(add_book_type_model, validate=True)
+    @login_required
+    @api_interface
     def post(self):
         name = request.json.get('name')
         loan_duration = request.json.get('loan_duration')
 
-        res = book_type_svc.add_book_type(name, loan_duration)
+        return book_type_svc.add_book_type(name, loan_duration)
 
-        return res.get_as_json(), res.status_code
-
+    @login_required
+    @api_interface
     def get(self):
-        res = book_type_svc.get_book_types()
-
-        return res.get_as_json(), res.status_code
+        return book_type_svc.get_book_types()
 
 
 class BookType(Resource):
     @book_type_api.doc(book_type_id_doc)
+    @login_required
+    @api_interface
     def get(self, book_type_id: int):
-        res = book_type_svc.get_book_type(book_type_id)
-
-        return res.get_as_json(), res.status_code
+        return book_type_svc.get_book_type(book_type_id)
 
     @book_type_api.doc(book_type_id_doc)
     @book_type_api.expect(update_book_type_model, validate=True)
+    @login_required
+    @api_interface
     def put(self, book_type_id: int):
         updated_book_type = request.json.get('updated_book_type')
-        res = book_type_svc.update_book_type(book_type_id, updated_book_type)
-
-        return res.get_as_json(), res.status_code
+        return book_type_svc.update_book_type(book_type_id, updated_book_type)
 
 
 book_type_api.add_resource(BookTypes, '')
