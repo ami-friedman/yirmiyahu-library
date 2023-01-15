@@ -13,7 +13,7 @@ add_book_model = book_api.model(
     model={
         'title': fields.String(required=True, description="Book's title"),
         'author_id': fields.Integer(required=True, description="ID of the book author"),
-        'category_id': fields.Integer(required=True, description="ID of the book category"),
+        'genre_id': fields.Integer(required=True, description="ID of the book genre"),
         'book_type_id': fields.Integer(required=True, description="ID of the book book_type"),
     })
 
@@ -32,10 +32,10 @@ class Books(Resource):
     @api_interface
     def post(self):
         author_id = request.json.get('author_id')
-        category_id = request.json.get('category_id')
+        genre_id = request.json.get('genre_id')
         book_type_id = request.json.get('book_type_id')
 
-        return book_svc.add_book(author_id, category_id, book_type_id)
+        return book_svc.add_book(author_id, genre_id, book_type_id)
 
     @api_interface
     def get(self):

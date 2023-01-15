@@ -12,9 +12,9 @@ class BookService:
     def __init__(self):
         self.logger = get_logger()
         
-    def add_book(self, title: str, author_id: int, category_id: int, book_type_id: int) -> int:
+    def add_book(self, title: str, author_id: int, genre_id: int, book_type_id: int) -> int:
         self.logger.info(f'About to add book: {title=}')
-        book = Book(title=title, author_id=author_id, category_id=category_id, book_type_id=book_type_id)
+        book = Book(title=title, author_id=author_id, genre_id=genre_id, book_type_id=book_type_id)
         try:
             save_to_db(book)
         except Conflict:
@@ -44,8 +44,8 @@ class BookService:
 
         if title := updated_book.get('title'):
             book.title = title
-        if category_id := updated_book.get('category_id'):
-            book.category_id = category_id
+        if genre_id := updated_book.get('genre_id'):
+            book.genre_id = genre_id
         if author_id := updated_book.get('author_id'):
             book.author_id = author_id
         if book_type := updated_book.get('book_type'):

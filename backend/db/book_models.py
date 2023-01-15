@@ -30,13 +30,13 @@ class Author(db.Model):
         return f'<Author {self.first_name} {self.last_name}>'
 
 
-class Category(db.Model):
+class Genre(db.Model):
     __table_args__ = (
-        db.UniqueConstraint('name', name='unique_category'),
+        db.UniqueConstraint('name', name='unique_genre'),
     )
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.Text, nullable=False, unique=True)
-    books = db.relationship('Book', backref=db.backref('category', lazy=True))
+    books = db.relationship('Book', backref=db.backref('genre', lazy=True))
 
     @property
     def json(self) -> Dict:
@@ -73,7 +73,7 @@ class Book(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     title = db.Column(db.Text, nullable=False)
     author_id = db.Column(db.Integer, ForeignKey('author.id'), nullable=False)
-    category_id = db.Column(db.Integer, ForeignKey('category.id'), nullable=False)
+    genre_id = db.Column(db.Integer, ForeignKey('genre.id'), nullable=False)
     book_type_id = db.Column(db.Integer, ForeignKey('book_type.id'), nullable=False)
     loans = db.relationship('Loan', backref=db.backref('book', lazy=True))
     reservations = db.relationship('Reservation', backref=db.backref('book', lazy=True))
@@ -88,6 +88,6 @@ class Book(db.Model):
             'title': self.title,
             'author_id': self.author_id,
             'author': self.author.json,
-            'category': self.category.json if self.category else None,
+            'genre': self.genre.json if self.genre else None,
             'book_type': self.book_type.json if self.book_type else None,
         }

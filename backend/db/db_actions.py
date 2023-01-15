@@ -6,7 +6,7 @@ from db.db_config import db, DATABASE_URI, flask_app
 from logger import get_logger
 
 # These imports are required for create_all()
-from db.book_models import Author, Category, Book, BookType
+from db.book_models import Author, Genre, Book, BookType
 from db.user_models import User
 
 logger = get_logger()

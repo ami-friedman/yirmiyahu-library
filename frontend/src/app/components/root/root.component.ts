@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UserFacadeService } from '../auth/user-facade.service';
 
 
 @Component({
@@ -8,7 +9,11 @@ import { Component } from '@angular/core';
 })
 export class RootComponent {
 
-  constructor() {
-    
+  constructor(private userService: UserFacadeService) {
+    const user = localStorage.getItem('user');
+    if (user) {
+      this.userService.loggedIn(JSON.parse(user))
+    }
+   
   }
 }

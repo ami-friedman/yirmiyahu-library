@@ -12,7 +12,7 @@ from waitress import serve
 from api.author_api import author_api
 from api.book_api import book_api
 from api.book_type_api import book_type_api
-from api.category_api import category_api
+from api.genre_api import genre_api
 from api.loan_api import loan_api
 from api.user_api import user_api
 from db.db_config import flask_app, db
@@ -33,7 +33,7 @@ app = Api(app=blueprint,
 app.add_namespace(user_api)
 app.add_namespace(author_api)
 app.add_namespace(book_api)
-app.add_namespace(category_api)
+app.add_namespace(genre_api)
 app.add_namespace(book_type_api)
 app.add_namespace(loan_api)
 

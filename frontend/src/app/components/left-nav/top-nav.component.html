@@ -1,4 +1,32 @@
-<div class="mat-sidenav">
+<mat-toolbar color="primary">
+  <span class="fill-remaining-space" *ngIf="currentUser">
+    <button mat-icon-button [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger" (click)="menuTrigger.openMenu()" class="pointer">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu" [overlapTrigger]="false">
+    <span (mouseleave)="menuTrigger.closeMenu()">
+        <a [routerLink]="'catalog'">
+        <button mat-menu-item>
+          <mat-icon svgIcon="catalog"></mat-icon>
+          <span>Catalog</span>
+    </button></a>
+
+     
+  <button mat-menu-item>
+        <mat-icon>people_outline</mat-icon>
+        <span>Subscribers</span>
+      </button>
+  <button mat-menu-item (click)="onLogout()">
+        <mat-icon>exit_to_app</mat-icon>
+        <span>{{currentUser.name}}</span>
+      </button>
+  </span>
+  </mat-menu>
+  </span>
+  <span class="fill-remaining-space"> <img  src="/assets/brand.svg" height="30" width="auto"></span>
+</mat-toolbar>
+
+<!-- <div class="mat-sidenav">
     <header class="sidenav-brand pointer" matTooltip="About">
 
         <img  src="/assets/brand.svg" height="30" width="auto">
@@ -12,13 +40,13 @@
               <mat-expansion-panel-header>
                 <mat-panel-title>
                     <button mat-button class="menu-button" matTooltip="Subscribers" (click)="accordion.openAll()">
-                        <span>Books</span>
+                        <span>Catalog</span>
                     </button>
                 </mat-panel-title>
               </mat-expansion-panel-header>
               <p>Titles</p>
               <p>Authors</p>
-              <p>Categories</p>
+              <p>Genres</p>
               <p>Types</p>
             </mat-expansion-panel>
           </mat-accordion>
@@ -47,4 +75,4 @@
 
 </div>
 
-
+ -->
