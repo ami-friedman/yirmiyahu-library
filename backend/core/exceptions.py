@@ -9,3 +9,7 @@ class Conflict(Exception):
 
 class NotFound(Exception):
     pass
+
+
+class NotAllowed(Exception):
+    pass

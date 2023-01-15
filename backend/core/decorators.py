@@ -1,6 +1,6 @@
-from core.exceptions import Unauthorized, Conflict, NotFound
+from core.exceptions import Unauthorized, Conflict, NotFound, NotAllowed
 from logger import get_logger
-from responses import OK, GenericError, UnauthorizedRes, ConflictRes, NotFoundRes
+from responses import OK, GenericError, UnauthorizedRes, ConflictRes, NotFoundRes, NotAllowedRes
 
 logger = get_logger()
 
@@ -28,6 +28,10 @@ def api_interface(func):
             msg = f'The item was not found in DB'
             logger.error(msg)
             return NotFoundRes(msg=msg)
+        except NotAllowed:
+            msg = f'The action requested is not allowed'
+            logger.error(msg)
+            return NotAllowedRes(msg=msg)
         except Exception as exc:
             msg = f'Error occurred in {func}: {exc}'
             logger.error(msg)

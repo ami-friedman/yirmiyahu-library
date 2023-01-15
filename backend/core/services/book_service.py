@@ -59,5 +59,16 @@ class BookService:
 
         return book.json
 
+    def is_book_on_loan(self, book_id: int) -> bool:
+        book = Book.query.get(book_id)
+        self.logger.info(f'Check if {book=} is on loan')
+
+        if book.loans:
+            loan = next((loan for loan in book.loans if loan.return_date is None), None)
+            self.logger.info(f'{book=} is on {loan=}')
+            return bool(loan)
+
+        return False
+
 
 book_svc = BookService()

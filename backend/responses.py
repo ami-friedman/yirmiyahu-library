@@ -40,3 +40,8 @@ class ConflictRes(BaseResponse):
 class NotFoundRes(BaseResponse):
     def __init__(self, msg: str = None):
         super().__init__(msg=msg, status_code=requests.codes.not_found)
+
+
+class NotAllowedRes(BaseResponse):
+    def __init__(self, msg: str = None):
+        super().__init__(msg=msg, status_code=requests.codes.not_allowed)

@@ -53,6 +53,7 @@ class BookType(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.Text, nullable=False, unique=True)
     loan_duration = db.Column(db.Integer, nullable=False)
+    extension_duration = db.Column(db.Integer, nullable=False)
     books = db.relationship('Book', backref=db.backref('book_type', lazy=True))
 
     @property
@@ -61,6 +62,7 @@ class BookType(db.Model):
             'id': self.id,
             'name': self.name,
             'loan_duration': self.loan_duration,
+            'extension_duration': self.extension_duration,
         }
 
 
@@ -73,17 +75,19 @@ class Book(db.Model):
     author_id = db.Column(db.Integer, ForeignKey('author.id'), nullable=False)
     category_id = db.Column(db.Integer, ForeignKey('category.id'), nullable=False)
     book_type_id = db.Column(db.Integer, ForeignKey('book_type.id'), nullable=False)
+    loans = db.relationship('Loan', backref=db.backref('book', lazy=True))
+    reservations = db.relationship('Reservation', backref=db.backref('book', lazy=True))
 
     def __repr__(self):
         return f'<Book {self.title}>'
 
-    def to_dict(self) -> Dict:
+    @property
+    def json(self) -> Dict:
         return {
             'id': self.id,
             'title': self.title,
             'author_id': self.author_id,
             'author': self.author.json,
             'category': self.category.json if self.category else None,
-            'book_type': self.book_type.json if self.book_type else None
+            'book_type': self.book_type.json if self.book_type else None,
         }
-
