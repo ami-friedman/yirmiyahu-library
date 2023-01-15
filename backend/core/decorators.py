@@ -1,6 +1,6 @@
-from core.exceptions import Unauthorized, Conflict
+from core.exceptions import Unauthorized, Conflict, NotFound
 from logger import get_logger
-from responses import OK, GenericError, UnauthorizedRes, ConflictRes
+from responses import OK, GenericError, UnauthorizedRes, ConflictRes, NotFoundRes
 
 logger = get_logger()
 
@@ -23,7 +23,11 @@ def api_interface(func):
         except Conflict:
             msg = f'The item already exists in DB'
             logger.error(msg)
-            return ConflictRes(msg='The item already exists in DB')
+            return ConflictRes(msg=msg)
+        except NotFound:
+            msg = f'The item was not found in DB'
+            logger.error(msg)
+            return NotFoundRes(msg=msg)
         except Exception as exc:
             msg = f'Error occurred in {func}: {exc}'
             logger.error(msg)

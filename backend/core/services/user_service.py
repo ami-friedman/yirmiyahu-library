@@ -6,7 +6,6 @@ from google.oauth2 import id_token
 
 from core.decorators import api_interface
 from core.enums import Role
-from db.db_models import User, save_to_db
 from core.exceptions import Unauthorized
 from logger import get_logger
 

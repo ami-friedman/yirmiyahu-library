@@ -11,7 +11,7 @@ from waitress import serve
 
 from api.author_api import author_api
 from api.user_api import user_api
-from db.db_models import flask_app
+from db.db_config import flask_app, db
 from logger import get_logger
 
 
@@ -34,6 +34,7 @@ flask_app.register_blueprint(blueprint)
 flask_app.logger = get_logger()
 
 if __name__ == '__main__':
+    db.init_app(flask_app)
     if os.environ.get('LOCAL_RUN'):
         flask_app.run(debug=True, port=5000, host='127.0.0.1')
     else:

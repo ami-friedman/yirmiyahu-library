@@ -5,3 +5,7 @@ class Unauthorized(Exception):
 
 class Conflict(Exception):
     pass
+
+
+class NotFound(Exception):
+    pass
