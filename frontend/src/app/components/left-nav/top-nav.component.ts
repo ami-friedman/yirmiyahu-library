@@ -5,11 +5,11 @@ import { User } from 'src/app/models/user.model';
 import { UserFacadeService } from '../auth/user-facade.service';
 
 @Component({
-  selector: 'app-left-nav',
-  templateUrl: './left-nav.component.html',
-  styleUrls: ['./left-nav.component.scss']
+  selector: 'app-top-nav',
+  templateUrl: './top-nav.component.html',
+  styleUrls: ['./top-nav.component.scss']
 })
-export class LeftNavComponent {
+export class TopNavComponent {
 
   currentUser: User;
 

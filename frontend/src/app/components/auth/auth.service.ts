@@ -14,10 +14,10 @@ export class AuthService {
     }
 
     login(token: string): Observable<User> {
-        return this.http.post<User>('api/user/login', {token})
+        return this.http.post<User>('api/users/login', {token})
     }
 
     logout(user: User): Observable<User> {
-        return this.http.post<User>('api/user/logout', user)
+        return this.http.post<User>('api/users/logout', user)
     }
 }

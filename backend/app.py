@@ -9,10 +9,16 @@ from flask_cors import CORS
 from urllib3.exceptions import InsecureRequestWarning
 from waitress import serve
 
-from api.user.user_api import user_api
-from db.db_models import flask_app
+from api.author_api import author_api
+from api.book_api import book_api
+from api.book_type_api import book_type_api
+from api.genre_api import genre_api
+from api.loan_api import loan_api
+from api.user_api import user_api
+from db.db_config import flask_app, db
+from flask_login import LoginManager
 from logger import get_logger
-
+from login_manager import login_manager
 
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 CORS(flask_app, resources={r'/*': {'origins': '*'}})
@@ -25,6 +31,11 @@ app = Api(app=blueprint,
           description='Yirmiyahu Library Application')
 
 app.add_namespace(user_api)
+app.add_namespace(author_api)
+app.add_namespace(book_api)
+app.add_namespace(genre_api)
+app.add_namespace(book_type_api)
+app.add_namespace(loan_api)
 
 logging.basicConfig(level=logging.NOTSET,
                     format='%(asctime)s : %(levelname)-6s : %(filename)s:%(lineno)s:%(funcName)-30s :: %(message)s')
@@ -32,6 +43,8 @@ flask_app.register_blueprint(blueprint)
 flask_app.logger = get_logger()
 
 if __name__ == '__main__':
+    db.init_app(flask_app)
+    login_manager.init_app(flask_app)
     if os.environ.get('LOCAL_RUN'):
         flask_app.run(debug=True, port=5000, host='127.0.0.1')
     else:

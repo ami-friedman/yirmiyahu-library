@@ -13,11 +13,12 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environment.prod';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpInterceptorService } from './http-interceptor.service';
-
+import { EntityDataModule } from '@ngrx/data';
+import { RootComponent } from './components/root/root.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -27,11 +28,12 @@ import { HttpInterceptorService } from './http-interceptor.service';
     AuthModule.forRoot(),
     StoreModule.forRoot({auth: authReducer}),
     EffectsModule.forRoot([]),
+    EntityDataModule.forRoot({}),
     StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production})
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [RootComponent]
 })
 export class AppModule {}

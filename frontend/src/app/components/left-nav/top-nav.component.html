@@ -1,0 +1,33 @@
+<mat-toolbar color="primary">
+  <span class="fill-remaining-space" *ngIf="currentUser">
+    <button mat-icon-button [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger" (click)="menuTrigger.openMenu()" class="pointer">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu" [overlapTrigger]="false">
+    <span (mouseleave)="menuTrigger.closeMenu()">
+        <a [routerLink]="'catalog'">
+        <button mat-menu-item>
+          <mat-icon svgIcon="catalog"></mat-icon>
+          <span>Catalog</span>
+    </button></a>
+
+     
+  <button mat-menu-item>
+        <mat-icon>people_outline</mat-icon>
+        <span>Subscription</span>
+      </button>
+  
+      <button mat-menu-item>
+        <mat-icon>mail</mat-icon>
+        <span>Emails</span>
+      </button>
+
+  <button mat-menu-item (click)="onLogout()">
+        <mat-icon>exit_to_app</mat-icon>
+        <span>{{currentUser.name}}</span>
+      </button>
+  </span>
+  </mat-menu>
+  </span>
+  <span class="fill-remaining-space"> <img  src="/assets/brand.svg" height="30" width="auto"></span>
+</mat-toolbar>

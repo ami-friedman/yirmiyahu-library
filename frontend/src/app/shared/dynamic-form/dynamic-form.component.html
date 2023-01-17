@@ -1,0 +1,8 @@
+<section [formGroup]='form'>
+    <section *ngFor="let field of formFields" class="form-row">
+        <mat-form-field>
+            <mat-label>{{ field.label }}</mat-label>
+            <input [formControlName]="field.key" matInput>
+        </mat-form-field>
+</section>
+  </section>

@@ -1,0 +1,31 @@
+
+    <div class="titles-container">
+        <table mat-table [dataSource]="titles" class="mat-elevation-z8" matSort (matSortChange)="onSortChange($event)"
+        matSortActive="title" matSortDirection="asc" matSortDisableClear>
+          <ng-container matColumnDef="title">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Title</th>
+            <td mat-cell *matCellDef="let title"> {{title.title}} </td>
+          </ng-container>
+        
+          <ng-container matColumnDef="author">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Author</th>
+            <td mat-cell *matCellDef="let title"> {{title.author.first_name}} {{title.author.last_name}}</td>
+          </ng-container>
+        
+          <ng-container matColumnDef="availability">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Availability</th>
+            <td mat-cell *matCellDef="let title">{{ title.availability }}</td>
+          </ng-container>
+        
+          <ng-container matColumnDef="action1">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let title"> <button mat-raised-button>Add to Card</button></td>
+          </ng-container>
+        
+        
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </div>
+
+
