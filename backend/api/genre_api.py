@@ -53,6 +53,12 @@ class Genre(Resource):
         updated_genre = request.json.get('updated_genre')
         return genre_svc.update_genre(genre_id, updated_genre)
 
+    @genre_api.doc(genre_id_doc)
+    @login_required
+    @api_interface
+    def delete(self, genre_id: int):
+        return genre_svc.delete_genre(genre_id)
+
 
 genre_api.add_resource(Categories, '')
 genre_api.add_resource(Genre, '/<int:genre_id>')

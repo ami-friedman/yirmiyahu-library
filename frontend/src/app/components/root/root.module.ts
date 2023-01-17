@@ -54,7 +54,7 @@ const routes: Routes = [
     CatalogComponent,
     TitlesComponent,
     AuthorsComponent,
-    GenresComponent
+    GenresComponent,
   ],
   imports: [
     RouterModule,

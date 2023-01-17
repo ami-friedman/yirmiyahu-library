@@ -16,5 +16,10 @@ export class GenresService {
 
   add(genre: Genre): Observable<Genre> {
     return this.http.post<Genre>('api/genres', genre)
-}
+  }
+
+  delete(genreId: number): Observable<number> {
+    return this.http.delete<number>('api/genres', {params: {id: genreId}})
+  }
+
 }

@@ -3,7 +3,7 @@ from typing import Dict, List
 from core.decorators import api_interface
 from core.exceptions import Conflict, NotFound
 from db.book_models import Genre
-from db.db_actions import save_to_db
+from db.db_actions import save_to_db, delete_from_db
 from logger import get_logger
 
 
@@ -48,6 +48,13 @@ class GenreService:
         save_to_db(genre)
 
         return genre.json
+
+    def delete_genre(self, genre_id: int) -> int:
+        self.logger.info(f'About to delete {genre_id=}')
+
+        delete_from_db(Genre.query.filter_by(id=genre_id))
+
+        return genre_id
 
 
 genre_svc = GenreService()
