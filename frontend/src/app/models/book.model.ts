@@ -1,4 +1,10 @@
 
+export enum BookAvailability {
+  Available = 'available',
+  OnLoan = 'on_loan',
+  Reserved = 'reserved'
+}
+
 export interface Author {
   first_name: string,
   last_name: string,
@@ -17,10 +23,12 @@ export interface BookType {
   id?: number
 }
 
+
 export interface Book {
     title: string,
     author: Author,
     genre: Genre,
     type: BookType,
+    availability: BookAvailability,
     id?: number,
   }

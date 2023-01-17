@@ -1,1 +1,38 @@
-<p>catalog works</p>
+
+<mat-sidenav-container  autosize>
+    <mat-sidenav #sidenav="matSidenav" opened mode="side" class="mat-elevation-z8" [disableClose]="true">
+      <div class="mat-sidenav">
+
+        <span>
+            <a routerLink="titles">
+          <button mat-button class="menu-button" [class.selected-menu-item]="currentRoute.includes('titles')">
+            <span>Titles</span>
+        </button></a></span>
+
+        <span>
+            <a routerLink="authors">
+          <button mat-button class="menu-button" [class.selected-menu-item]="currentRoute.includes('authors')">
+            <span>Authors</span>
+        </button></a></span>
+
+        <span>
+            <a routerLink="genres">
+          <button mat-button class="menu-button"  [class.selected-menu-item]="currentRoute.includes('genres')">
+            <span>Genres</span>
+        </button></a></span>
+
+        <span>
+            <a routerLink="book_types">
+          <button mat-button class="menu-button" [class.selected-menu-item]="currentRoute.includes('book_types')">
+            <span>Book Types</span>
+        </button></a></span>
+    
+    </div>
+
+    </mat-sidenav>
+    <mat-sidenav-content class="content">
+        
+       <router-outlet></router-outlet>
+        
+    </mat-sidenav-content>
+</mat-sidenav-container>
