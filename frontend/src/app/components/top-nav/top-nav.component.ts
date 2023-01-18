@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { SocialAuthService } from 'angularx-social-login';
 import { User } from 'src/app/models/user.model';
 import { UserFacadeService } from '../auth/user-facade.service';
 
@@ -15,7 +14,6 @@ export class TopNavComponent {
 
   constructor(
     private router: Router,
-    private socialAuthService: SocialAuthService,
     private userService: UserFacadeService
     ) { 
       this.userService.currentUser$.subscribe(
@@ -26,7 +24,6 @@ export class TopNavComponent {
     }
 
     onLogout() {
-    this.socialAuthService.signOut();
     this.userService.loggedOut();
     this.router.navigateByUrl('auth/login');
   }

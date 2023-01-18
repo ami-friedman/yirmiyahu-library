@@ -1,31 +1,29 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { GoogleLoginProvider, SocialAuthService, SocialUser } from 'angularx-social-login';
 import { noop, tap } from 'rxjs';
 import { AuthService } from '../auth.service';
 import { UserFacadeService } from '../user-facade.service';
+
+declare var google: any;
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
-
-  socialUser!: SocialUser;
-
+export class LoginComponent implements AfterViewInit {
 
   constructor(
-    private socialAuthService: SocialAuthService, 
     private authService: AuthService, 
     private userService: UserFacadeService,
     private router: Router) { 
-    this.socialAuthService.authState.subscribe((user: SocialUser) => { 
-      if (!user) {
-        return
-      }
-      this.authService.login(user.idToken)
+    
+
+  }
+
+  loginWithGoogle(response){
+    this.authService.login(response.credential)
       .pipe(
         tap(user => {
         this.userService.loggedIn(user);
@@ -39,11 +37,17 @@ export class LoginComponent {
           alert('Not Authorized')
       }
     }});
-    })
-
+    
   }
 
-  loginWithGoogle(){
-    this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID);
+  ngAfterViewInit(): void {
+    google.accounts.id.initialize({
+      client_id: "389702736477-p3c32j84usecie7o3ubfnqd2nh7rkic1.apps.googleusercontent.com",
+      callback: (response: any) => this.loginWithGoogle(response)
+    });
+    google.accounts.id.renderButton(
+      document.getElementById("buttonDiv"),
+      { size: "large", type: "standard", shape: "pill" }  // customization attributes
+    );
   }
 }

@@ -4,7 +4,7 @@ import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SharedModule } from '../../shared/shared.module';
 import { RootComponent } from './root.component';
-import { TopNavComponent } from '../left-nav/top-nav.component';
+import { TopNavComponent } from '../top-nav/top-nav.component';
 import { RouterModule, Routes } from '@angular/router';
 import { EntityDataService, EntityDefinitionService } from '@ngrx/data';
 import { entityMetadata as BookEntityMetadata } from '../catalog/book/book-metadata';
