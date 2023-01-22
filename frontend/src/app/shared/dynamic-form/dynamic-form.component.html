@@ -1,8 +1,12 @@
-<section [formGroup]='form'>
-    <section *ngFor="let field of formFields" class="form-row">
+<section [formGroup]='form' class="form-content">
+    <section *ngFor="let field of formFields">
         <mat-form-field>
             <mat-label>{{ field.label }}</mat-label>
             <input [formControlName]="field.key" matInput>
         </mat-form-field>
+     </section>
+     <section class="form-actions">
+        <button mat-raised-button (click)="onSubmit()" class="form-button">{{confirmButtonText}}</button>
+        <button mat-raised-button (click)="onCancel()" class="form-button">{{cancelButtonText}}</button>
+     </section>
 </section>
-  </section>

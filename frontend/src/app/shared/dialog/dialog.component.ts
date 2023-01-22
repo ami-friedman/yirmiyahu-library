@@ -31,8 +31,9 @@ export class DialogComponent {
     }
   }
 
-  onConfirmClick(): void {
-    this.dialogRef.close(true);
+  onConfirmClick(formValue: any): void {
+    this.dialogRef.close(formValue);
+    console.log(JSON.stringify(formValue))
   }
 
 }
