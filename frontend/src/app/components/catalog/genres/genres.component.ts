@@ -16,7 +16,8 @@ export class GenresComponent {
   genres$: Observable<Genre[]>;
 
   constructor(private genreService: GenresService, private dialogService: DialogService) { 
-    this.genres$ = this.genreService.getAll();
+    this.genres$ = this.genreService.genres$;
+    this.genreService.getAll();
   }
 
   onAddGenre() {
@@ -32,7 +33,51 @@ export class GenresComponent {
       }),]
 
     }
-    this.dialogService.open(options)
+    this.dialogService.open(options);
+    this.dialogService.confirmed().subscribe(
+      newGenre => {
+        this.genreService.add(newGenre);
+      }
+    )
+  }
+
+  onEditGenre(genre: Genre) {
+    let options: DialogOptions = {
+      title: 'Edit Genre',
+      cancelText: 'Cancel',
+      confirmText: 'Save',
+      formFields: [new FormTextbox({
+        value: genre.name,
+        key: 'name',
+        type: 'text',
+        label: 'Genre Name',
+        required: true,
+      }),]
+
+    }
+    this.dialogService.open(options);
+    this.dialogService.confirmed().subscribe(
+      newGenre => {
+        newGenre.id = genre.id;
+        this.genreService.update(newGenre);
+      }
+    )
+  }
+
+  onDeleteGenre(genre: Genre) {
+    let options: DialogOptions = {
+      title: 'Genre will be deleted! Are you sure?',
+      cancelText: 'Cancel',
+      confirmText: 'Yes'
+    }
+      
+    this.dialogService.open(options);
+    this.dialogService.confirmed().subscribe(
+      newGenre => {
+        newGenre.id = genre.id;
+        this.genreService.update(newGenre);
+      }
+    )
   }
 
 }

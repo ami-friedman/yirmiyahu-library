@@ -8,6 +8,13 @@
     margin-left: 50px;
     margin-top: 50px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+}
+
+.genres {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  margin-left: 10px;
 }
   

@@ -1,16 +1,23 @@
 <div class="container">
-  <button mat-button (click)="onAddGenre()" class="pointer">Add Genre</button>
+  <div>
+    <button mat-raised-button (click)="onAddGenre()" class="pointer">Add Genre</button>
+  </div>
+
+  <div class="genres">
     <mat-card class="genre" *ngFor="let genre of (genres$ | async)">
-        <mat-card-header>
-        </mat-card-header>
-        <mat-card-content>
-          <h2>{{genre.name}}</h2>
-        </mat-card-content>
-        <mat-card-actions>
-          <button mat-button matTooltip="Delete genre"><mat-icon>delete</mat-icon></button>
-          <button mat-button matTooltip="Edit genre"><mat-icon>edit</mat-icon></button>
-        </mat-card-actions>
-      </mat-card>
+      <mat-card-header>
+      </mat-card-header>
+      <mat-card-content>
+        <h2>{{genre.name}}</h2>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button matTooltip="Delete genre"><mat-icon>delete</mat-icon></button>
+        <button mat-button matTooltip="Edit genre" (click)="onEditGenre(genre)"><mat-icon>edit</mat-icon></button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  
+    
 </div>
 
 

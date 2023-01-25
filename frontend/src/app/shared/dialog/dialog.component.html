@@ -5,7 +5,13 @@
 	[cancelButtonText]="cancelButtonText"
 
 	(formSaved)="onConfirmClick($event)"
-	
-	>
+	*ngIf="formFields">
 </app-dynamic-form>
+
+<span *ngIf></span>
 </mat-dialog-content>
+
+<mat-dialog-actions *ngIf="!formFields">
+    <button mat-button mat-dialog-close>{{}}</button>
+    <button  mat-button (click)="onAddScenario()"  [disabled]="!newScenarioForm.valid">ADD</button>
+</mat-dialog-actions>

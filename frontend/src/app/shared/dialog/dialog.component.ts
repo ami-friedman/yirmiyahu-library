@@ -33,7 +33,6 @@ export class DialogComponent {
 
   onConfirmClick(formValue: any): void {
     this.dialogRef.close(formValue);
-    console.log(JSON.stringify(formValue))
   }
 
 }

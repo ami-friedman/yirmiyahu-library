@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Genre } from 'src/app/models/book.model';
 
 @Injectable({
@@ -8,18 +8,30 @@ import { Genre } from 'src/app/models/book.model';
 })
 export class GenresService {
 
+  genres$: BehaviorSubject<Genre[]> = new BehaviorSubject<Genre[]>(null);
+
   constructor(private http: HttpClient) { }
 
-  getAll(): Observable<Genre[]> {
-    return this.http.get<Genre[]>('api/genres')
+  getAll() {
+    this.http.get<Genre[]>('api/genres').subscribe( genres => this.genres$.next(genres))
   }
 
-  add(genre: Genre): Observable<Genre> {
-    return this.http.post<Genre>('api/genres', genre)
+  add(genre: Genre) {
+    this.http.post<Genre>('api/genres', genre).subscribe(
+      () => {this.getAll()}
+    )
   }
 
-  delete(genreId: number): Observable<number> {
-    return this.http.delete<number>('api/genres', {params: {id: genreId}})
+  update(genre: Genre) {
+    this.http.put<Genre>(`api/genres/${genre.id}`, {updated_genre: genre}).subscribe(
+      () => {this.getAll()}
+    )
+  }
+
+  delete(genreId: number) {
+    this.http.delete<number>(`api/genres/${genreId}`, {params: {id: genreId}}).subscribe(
+      () => {this.getAll()}
+    )
   }
 
 }
